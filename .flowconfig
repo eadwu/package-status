@@ -1,0 +1,12 @@
+[include]
+
+[ignore]
+.*/node_modules/.*
+
+[libs]
+
+[options]
+module.use_strict=true
+experimental.const_params=true
+
+[version]

@@ -1,0 +1,53 @@
+{
+  "name": "package-status",
+  "version": "1.0.0",
+  "description": "A short description of your package",
+  "main": "./lib/package-status",
+  "engines": {
+    "atom": ">=1.13.0"
+  },
+  "repository": "https://github.com/eadwu/package-status",
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "atom-package-dependencies": "^1.0.3"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint-plugin-flowtype": "^2.35.0",
+    "standard": "^10.0.3"
+  },
+  "packageDependencies": {
+    "status-bar": "^1.5.1"
+  },
+  "consumedServices": {
+    "status-bar": {
+      "versions": {
+        "^1.1.0": "consumeStatusBar"
+      }
+    }
+  },
+  "configSchema": {
+    "packageList": {
+      "type": "array",
+      "order": 1,
+      "title": "Package List",
+      "default": [],
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "plugins": [
+      "flowtype"
+    ],
+    "globals": [
+      "atom"
+    ],
+    "env": {
+      "browser": true,
+      "node": true
+    }
+  }
+}
