@@ -1,0 +1,210 @@
+/**
+ * Based on
+ * Flow v0.53.1
+ * Atom v1.20.0-beta3
+ *
+ * @flow
+ */
+declare class atom$Package {
+  onDidDeactivate(callback: () => void): typeof atom$Disposable,
+  isCompatible(): boolean,
+  rebuild(): Promise<{
+    code: any,
+    stdout: any,
+    stderr: any
+  }>,
+  getBuildFailureOutput(): null | string
+}
+
+declare class atom$Disposable {
+  isDisposable: boolean,
+
+  constructor(disposalAction: () => void): void,
+  dispose(): void
+}
+
+declare class atom$ScopeDescriptor {
+  constructor(object: {
+    scopes: Array<string>
+  }): atom$ScopeDescriptor,
+  getScopesArray(): Array<string>
+}
+
+type atomConfig$get = {
+  sources: ?Array<string>,
+  excludeSources: ?Array<string>,
+  scope: ?atom$ScopeDescriptor
+}
+
+type atomConfig$scheme = {
+  type: ?string,
+  enum: ?Array<any>,
+  title: ?string,
+  order: ?number,
+  color: ?any,
+  default: ?any,
+  minimum: ?number,
+  maximum: ?number,
+  description: ?string
+}
+
+type atomConfig$changeCallback = (event: {
+  newValue: any,
+  oldValue: any
+}) => void
+
+declare var atom: {
+  onDidBeep(callback: () => void): typeof atom$Disposable,
+  onWillThrowError(callback: (event: {
+    originalError: {
+      message: string,
+      url: string,
+      line: number,
+      column: number,
+      preventDefault: () => void
+    }
+  }) => void): typeof atom$Disposable,
+  onDidThrowError(callback: (event: {
+    originalError: {
+      message: string,
+      url: string,
+      line: number,
+      column: number
+    }
+  }) => void): typeof atom$Disposable,
+  whenShellEnvironmentLoaded(callback: () => void): void,
+  isDevMode(): boolean,
+  inSafeMode(): boolean,
+  inSpecMode(): boolean,
+  getVersion(): string,
+  isReleasedVersion(): boolean,
+  getWindowLoadTime(): number,
+  getLoadSettings(): Object, // atom$LoadSettings maybe?
+  open(params: {
+    pathsToOpen: Array<string>,
+    newWindow: boolean,
+    devMode: boolean,
+    safeMode: boolean
+  }): void,
+  close(): void,
+  getSize(): {
+    width: number,
+    height: number
+  },
+  setSize(width: number, height: number): void,
+  getPosition(): {
+    x: number,
+    y: number
+  },
+  setPosition(x: number, y: number): void,
+  pickFolder(callback: (paths: Array<string>) => void): void,
+  getCurrentWindow(): void,
+  center(): void,
+  focus(): void,
+  show(): void,
+  hide(): void,
+  reload(): void,
+  restartApplication(): void,
+  isMaximized(): boolean,
+  isFullScreen(): boolean,
+  setFullScreen(fullScreen: boolean): void, // Defaults to false
+  toggleFullScreen(): void,
+  beep(): void,
+  confirm(options: ?{
+    message: string,
+    detailedMessage: ?string,
+    buttons: ?Array<string> | ?{ [key: string]: () => mixed }
+  }): ?number,
+  openDevTools(): Promise<mixed>,
+  toggleDevTools(): Promise<mixed>,
+  executeJavaScriptInDevTools(): void,
+
+  commands: { },
+  config: {
+    observe(keyPath: string, optionsOrCallback: ?(value: any) => void | {
+      scope: ?atom$ScopeDescriptor
+    }, callback: ?(value: mixed) => void): typeof atom$Disposable,
+
+    onDidChange(keyPath: ?string, optionsOrCallback: ?atomConfig$changeCallback | {
+      scope: ?atom$ScopeDescriptor
+    }, callback: ?atomConfig$changeCallback): typeof atom$Disposable,
+
+    get(keyPath: string, options: ?atomConfig$get): mixed,
+
+    set(keyPath: string, value: mixed, options: ?{
+      scopeSelector: ?string,
+      source: ?string
+    }): boolean,
+
+    unset(keyPath: string, options: ?{
+      scopeSelector: ?string,
+      source: ?string
+    }): void,
+
+    getAll(keyPath: string, options: ?atomConfig$get): Array<{
+      scopeDescriptor: atom$ScopeDescriptor,
+      value: mixed
+    }>,
+
+    getSources(): Array<string>,
+    getSchema(keyPath: string): null | atomConfig$scheme & {
+      properties: atomConfig$scheme
+    },
+
+    getUserConfigPath(): string,
+    transact(callback: () => void): void
+  },
+  clipboard: { },
+  contextMenu: { },
+  menu: { },
+  keymaps: { },
+  tooltips: { },
+  notifications: { },
+  project: { },
+  grammars: { },
+  history: { },
+  packages: {
+    onDidLoadInitialPackages(callback: () => void): typeof atom$Disposable,
+    onDidActivateInitialPackages(callback: () => void): typeof atom$Disposable,
+    onDidActivatePackage(callback: (pkg: typeof atom$Package) => void): typeof atom$Disposable,
+    onDidDeactivatePackage(callback: (pkg: typeof atom$Package) => void): typeof atom$Disposable,
+    onDidLoadPackage(callback: (pkg: typeof atom$Package) => void): typeof atom$Disposable,
+    onDidUnloadPackage(callback: (pkg: typeof atom$Package) => void): typeof atom$Disposable,
+    getApmPath(): string | typeof undefined,
+    getPackageDirPaths(): Array<string>,
+    resolvePackagePath(name: string): string | typeof undefined,
+    isBundledPackage(name: string): boolean,
+    enablePackage(name: string): null | typeof atom$Package,
+    disablePackage(name: string): null | typeof atom$Package,
+    isPackageDisabled(name: string): boolean,
+    getActivePackages(): Array<typeof atom$Package>,
+    getActivePackage(name: string): typeof atom$Package | typeof undefined,
+    isPackageActive(name: string): boolean,
+    hasActivatedInitialPackages(): boolean,
+    getLoadedPackages(): Array<typeof atom$Package>,
+    getLoadedPackage(name: string): typeof atom$Package | typeof undefined,
+    isPackageLoaded(name: string): boolean,
+    hasLoadedInitialPackages(): boolean,
+    getAvailablePackagePaths(): Array<string>,
+    getAvailablePackageNames(): Array<string>,
+    getAvailablePackageMetadata(): Array<string>
+  },
+  themes: { },
+  styles: { },
+  deserializers: { },
+  views: { },
+  workspace: { },
+  textEditors: { }
+}
+
+declare module 'atom' {
+  declare var Disposable: typeof atom$Disposable
+  declare class CompositeDisposable {
+    constructor(): void,
+    dispose(): void,
+    add(...disposables: Array<typeof atom$Disposable>): void,
+    remove(disposable: typeof atom$Disposable): void,
+    delete(disposable: typeof atom$Disposable): void,
+    clear(): void
+  }
+}

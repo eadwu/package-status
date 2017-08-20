@@ -1,0 +1,19 @@
+/* @flow */
+type Tile = {
+  getPriority(): number,
+  getItem(): HTMLElement,
+  destroy(): void
+}
+
+export type statusBar = {
+  addLeftTile({
+    item: HTMLElement,
+    priority: number
+  }): Tile,
+  addRightTile({
+    item: HTMLElement,
+    priority: number
+  }): Tile,
+  getLeftTiles(): Array<Tile>,
+  getRightTiles(): Array<Tile>
+}
