@@ -1,7 +1,7 @@
 {
   "name": "package-status",
   "version": "1.0.0",
-  "description": "A short description of your package",
+  "description": "Toggle packages through the status bar",
   "main": "./lib/package-status",
   "engines": {
     "atom": ">=1.13.0"
