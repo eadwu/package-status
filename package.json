@@ -8,16 +8,10 @@
   },
   "repository": "https://github.com/eadwu/package-status",
   "license": "BSD-3-Clause",
-  "dependencies": {
-    "atom-package-dependencies": "^1.0.3"
-  },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
     "eslint-plugin-flowtype": "^2.35.0",
     "standard": "^10.0.3"
-  },
-  "packageDependencies": {
-    "status-bar": "^1.5.1"
   },
   "consumedServices": {
     "status-bar": {
