@@ -6,7 +6,7 @@
   "engines": {
     "atom": ">=1.13.0"
   },
-  "repository": "https://gitlab.com/eadwu/package-status",
+  "repository": "https://github.com/eadwu/package-status",
   "license": "BSD-3-Clause",
   "devDependencies": {
     "babel-eslint": "^7.2.3",
